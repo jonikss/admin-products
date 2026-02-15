@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 interface ProductsToolbarProps {
   onRefresh: () => void;
 }
@@ -15,10 +17,13 @@ export function ProductsToolbar({ onRefresh }: ProductsToolbarProps) {
         >
           <img src="/icons/refresh.svg" alt="Обновить" width={20} height={20} />
         </button>
-        <button className="h-9 px-4 rounded-lg bg-[#242EDB] text-white text-sm font-medium flex items-center gap-2 hover:bg-[#1a22b0] transition-colors">
+        <Link
+          to="/add"
+          className="h-9 px-4 rounded-lg bg-[#242EDB] text-white text-sm font-medium flex items-center gap-2 hover:bg-[#1a22b0] transition-colors"
+        >
           <img src="/icons/plus.svg" alt="" width={16} height={16} />
           Добавить
-        </button>
+        </Link>
       </div>
     </div>
   );
