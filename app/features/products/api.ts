@@ -24,6 +24,27 @@ export interface FetchProductsParams {
   search?: string;
 }
 
+export interface AddProductParams {
+  title: string;
+  price: number;
+  brand: string;
+  sku: string;
+}
+
+export async function addProduct(data: AddProductParams): Promise<Product> {
+  const res = await fetch("https://dummyjson.com/products/add", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    throw new Error(`Failed to add product: ${res.status}`);
+  }
+
+  return res.json();
+}
+
 export async function fetchProducts({
   limit = 10,
   skip = 0,
