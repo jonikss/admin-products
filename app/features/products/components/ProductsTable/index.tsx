@@ -103,7 +103,7 @@ export function ProductsTable({
         header: "Оценка",
         cell: ({ getValue }) => {
           const rating = getValue() as number;
-          return <span className="text-gray-600">{rating.toFixed(1)}/5</span>;
+          return <span className="text-gray-600"><span className={rating < 3 ? "text-red-500" : ""}>{rating.toFixed(1)}</span>/5</span>;
         },
         size: 100,
         enableSorting: true,
