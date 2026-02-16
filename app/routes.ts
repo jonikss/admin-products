@@ -8,4 +8,5 @@ export default [
         ]),
     ]),
     route("login", "routes/login.tsx"),
+    route("api/command", "routes/api.command.ts"),
 ] satisfies RouteConfig;
