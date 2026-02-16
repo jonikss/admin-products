@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -29,13 +29,13 @@ export function ProductsTable({
         header: ({ table }) => (
           <Checkbox
             checked={table.getIsAllRowsSelected()}
-            onChange={table.getToggleAllRowsSelectedHandler()}
+            onChange={() => table.toggleAllRowsSelected()}
           />
         ),
         cell: ({ row }) => (
           <Checkbox
             checked={row.getIsSelected()}
-            onChange={row.getToggleSelectedHandler()}
+            onChange={() => row.toggleSelected()}
           />
         ),
         size: 48,
@@ -126,7 +126,7 @@ export function ProductsTable({
     []
   );
 
-  const rowSelection: RowSelectionState = {};
+  const [rowSelection, setRowSelection] = useState<RowSelectionState>({});
 
   const table = useReactTable({
     data,
@@ -140,6 +140,7 @@ export function ProductsTable({
         typeof updater === "function" ? updater(sorting) : updater;
       onSortingChange(next);
     },
+    onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
     manualSorting: true,
     enableRowSelection: true,
