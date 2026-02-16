@@ -64,6 +64,14 @@ export function useProducts() {
     setPage(1);
   };
 
+  const setSortingFromCommand = (field: string, direction: "asc" | "desc") => {
+    const columnId = field === "title" ? "name" : field;
+    const next: SortingState = [{ id: columnId, desc: direction === "desc" }];
+    setSorting(next);
+    saveSorting(next);
+    setPage(1);
+  };
+
   const sortBy = sorting[0]?.id === "name" ? "title" : sorting[0]?.id;
   const order = sorting[0]?.desc ? "desc" : "asc";
   const skip = (page - 1) * PAGE_SIZE;
@@ -96,6 +104,7 @@ export function useProducts() {
     setSorting: handleSortingChange,
     search,
     setSearch: handleSearchChange,
+    setSortingFromCommand,
     isFetching,
     isLoading,
     refetch,

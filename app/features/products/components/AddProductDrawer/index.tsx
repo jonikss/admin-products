@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "react-toastify";
 import { z } from "zod";
 import { addProduct } from "../../api";
@@ -19,6 +19,7 @@ type AddProductFormData = z.infer<typeof addProductSchema>;
 
 export function AddProductDrawer() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
   const {
     register,
@@ -26,6 +27,12 @@ export function AddProductDrawer() {
     formState: { errors },
   } = useForm<AddProductFormData>({
     resolver: zodResolver(addProductSchema),
+    defaultValues: {
+      title: searchParams.get("title") || "",
+      price: searchParams.get("price") || "",
+      brand: searchParams.get("brand") || "",
+      sku: "",
+    },
   });
 
   const close = () => navigate("/");
