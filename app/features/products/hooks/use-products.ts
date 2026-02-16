@@ -72,6 +72,15 @@ export function useProducts() {
     setPage(1);
   };
 
+  const resetAndRefetch = () => {
+    setSorting([]);
+    saveSorting([]);
+    setSearch("");
+    setDebouncedSearch("");
+    clearTimeout(debounceRef.current);
+    setPage(1);
+  };
+
   const sortBy = sorting[0]?.id === "name" ? "title" : sorting[0]?.id;
   const order = sorting[0]?.desc ? "desc" : "asc";
   const skip = (page - 1) * PAGE_SIZE;
@@ -108,6 +117,7 @@ export function useProducts() {
     isFetching,
     isLoading,
     refetch,
+    resetAndRefetch,
     totalPages,
     showFrom,
     showTo,

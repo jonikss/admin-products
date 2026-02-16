@@ -29,6 +29,7 @@ export default function ProductsIndex() {
     isFetching,
     isLoading,
     refetch,
+    resetAndRefetch,
     totalPages,
     showFrom,
     showTo,
@@ -38,7 +39,7 @@ export default function ProductsIndex() {
   const { executeCommand } = useCommandExecutor({
     onSearch: setSearch,
     onSort: setSortingFromCommand,
-    onRefresh: refetch,
+    onRefresh: resetAndRefetch,
     onGotoPage: setPage,
   });
 
@@ -63,7 +64,7 @@ export default function ProductsIndex() {
         </div>
 
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm">
-          <ProductsToolbar onRefresh={() => refetch()} />
+          <ProductsToolbar onRefresh={resetAndRefetch} />
 
           {isLoading ? (
             <ProductsTableSkeleton rows={pageSize} />
