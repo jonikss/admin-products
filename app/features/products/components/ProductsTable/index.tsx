@@ -210,12 +210,19 @@ export function ProductsTable({
           {table.getRowModel().rows.map((row) => (
             <tr
               key={row.id}
-              className={`border-b border-gray-50 hover:bg-gray-50/50 transition-colors ${
+              className={`group border-b border-gray-50 hover:bg-gray-50/50 transition-colors ${
                 row.getIsSelected() ? "bg-blue-50/50" : ""
               }`}
             >
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="px-4 py-3">
+              {row.getVisibleCells().map((cell, cellIndex) => (
+                <td
+                  key={cell.id}
+                  className={`px-4 py-3 transition-colors ${
+                    cellIndex === 0
+                      ? "border-l-4 border-l-transparent group-hover:border-l-[#242EDB]"
+                      : ""
+                  }`}
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
