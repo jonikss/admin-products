@@ -10,6 +10,10 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
+    "@langchain/core": "^1.1.24",
+    "@langchain/groq": "^1.1.0",
+    "@langchain/ollama": "^1.2.2",
+    "@langchain/openai": "^1.2.7",
     "@react-router/node": "7.12.0",
     "@react-router/serve": "7.12.0",
     "@tanstack/react-query": "^5.90.21",
