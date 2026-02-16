@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-table";
 import type { Product } from "../../api";
 import { formatPrice } from "./utils";
+import { Checkbox } from "~/components/ui/Checkbox";
 
 interface ProductsTableProps {
   data: Product[];
@@ -26,30 +27,16 @@ export function ProductsTable({
       {
         id: "select",
         header: ({ table }) => (
-          <button
-            onClick={table.getToggleAllRowsSelectedHandler()}
-            className="flex items-center justify-center"
-          >
-            <img
-              src={table.getIsAllRowsSelected() ? "/icons/checkbox-checked.svg" : "/icons/checkbox.svg"}
-              alt=""
-              width={20}
-              height={20}
-            />
-          </button>
+          <Checkbox
+            checked={table.getIsAllRowsSelected()}
+            onChange={table.getToggleAllRowsSelectedHandler()}
+          />
         ),
         cell: ({ row }) => (
-          <button
-            onClick={row.getToggleSelectedHandler()}
-            className="flex items-center justify-center"
-          >
-            <img
-              src={row.getIsSelected() ? "/icons/checkbox-checked.svg" : "/icons/checkbox.svg"}
-              alt=""
-              width={20}
-              height={20}
-            />
-          </button>
+          <Checkbox
+            checked={row.getIsSelected()}
+            onChange={row.getToggleSelectedHandler()}
+          />
         ),
         size: 48,
         enableSorting: false,
