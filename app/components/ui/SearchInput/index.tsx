@@ -1,3 +1,4 @@
+import { cn } from "~/lib/cn";
 import SearchIcon from "@icons/search.svg?react";
 
 interface SearchInputProps {
@@ -14,7 +15,7 @@ export function SearchInput({
   className = "",
 }: SearchInputProps) {
   return (
-    <div className={`relative ${className}`}>
+    <div className={cn("relative", className)}>
       <SearchIcon
         width={20}
         height={20}

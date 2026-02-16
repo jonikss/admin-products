@@ -1,3 +1,4 @@
+import { cn } from "~/lib/cn";
 import ChevronLeftIcon from "@icons/chevron-left.svg?react";
 import ChevronRightIcon from "@icons/chevron-right.svg?react";
 
@@ -77,11 +78,12 @@ export function Pagination({
             <button
               key={p}
               onClick={() => onPageChange(p as number)}
-              className={`w-8 h-8 rounded-lg text-sm font-medium flex items-center justify-center transition-colors ${
+              className={cn(
+                "w-8 h-8 rounded-lg text-sm font-medium flex items-center justify-center transition-colors",
                 page === p
                   ? "bg-[#242EDB] text-white"
                   : "text-gray-600 hover:bg-gray-100"
-              }`}
+              )}
             >
               {p}
             </button>

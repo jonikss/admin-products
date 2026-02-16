@@ -1,5 +1,7 @@
+import { cn } from "~/lib/cn";
+
 function SkeletonBlock({ className }: { className: string }) {
-  return <div className={`animate-pulse rounded bg-gray-200 ${className}`} />;
+  return <div className={cn("animate-pulse rounded bg-gray-200", className)} />;
 }
 
 export function ProductsTableSkeleton({ rows = 20 }: { rows?: number }) {

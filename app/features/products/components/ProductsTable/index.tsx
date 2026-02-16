@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-table";
 import type { Product } from "../../api";
 import { formatPrice } from "./utils";
+import { cn } from "~/lib/cn";
 import { Checkbox } from "~/components/ui/Checkbox";
 import PlusIcon from "@icons/plus.svg?react";
 import DotsIcon from "@icons/dots.svg?react";
@@ -95,7 +96,7 @@ export function ProductsTable({
         header: "Оценка",
         cell: ({ getValue }) => {
           const rating = getValue() as number;
-          return <span className="text-gray-600"><span className={rating < 3 ? "text-red-500" : ""}>{rating.toFixed(1)}</span>/5</span>;
+          return <span className="text-gray-600"><span className={cn(rating < 3 && "text-red-500")}>{rating.toFixed(1)}</span>/5</span>;
         },
         size: 100,
         enableSorting: true,
@@ -164,9 +165,10 @@ export function ProductsTable({
                 return (
                   <th
                     key={header.id}
-                    className={`px-4 py-3 text-left text-sm font-medium text-gray-400 ${
-                      canSort ? "cursor-pointer select-none hover:text-gray-600" : ""
-                    }`}
+                    className={cn(
+                      "px-4 py-3 text-left text-sm font-medium text-gray-400",
+                      canSort && "cursor-pointer select-none hover:text-gray-600"
+                    )}
                     style={{ width: header.getSize() }}
                     onClick={canSort ? header.column.getToggleSortingHandler() : undefined}
                   >
@@ -195,18 +197,18 @@ export function ProductsTable({
           {table.getRowModel().rows.map((row) => (
             <tr
               key={row.id}
-              className={`group border-b border-gray-50 hover:bg-gray-50/50 transition-colors ${
-                row.getIsSelected() ? "bg-blue-50/50" : ""
-              }`}
+              className={cn(
+                "group border-b border-gray-50 hover:bg-gray-50/50 transition-colors",
+                row.getIsSelected() && "bg-blue-50/50"
+              )}
             >
               {row.getVisibleCells().map((cell, cellIndex) => (
                 <td
                   key={cell.id}
-                  className={`px-4 py-3 transition-colors ${
-                    cellIndex === 0
-                      ? "border-l-4 border-l-transparent group-hover:border-l-[#242EDB]"
-                      : ""
-                  }`}
+                  className={cn(
+                    "px-4 py-3 transition-colors",
+                    cellIndex === 0 && "border-l-4 border-l-transparent group-hover:border-l-[#242EDB]"
+                  )}
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
