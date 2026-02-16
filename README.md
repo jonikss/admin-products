@@ -1,87 +1,109 @@
-# Welcome to React Router!
+# Admin Products
 
-A modern, production-ready template for building full-stack React applications using React Router.
+Панель администратора для управления каталогом товаров. Построена на React Router 7 с серверным рендерингом.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/remix-run/react-router-templates/tree/main/default)
+## Стек технологий
 
-## Features
+- **React 19** + **TypeScript**
+- **React Router 7** (SSR, вложенные маршруты, clientLoader)
+- **TanStack Query** — загрузка и кэширование данных
+- **TanStack Table** — таблица с сортировкой и выбором строк
+- **React Hook Form** + **Zod** — формы и валидация
+- **Tailwind CSS 4** — стилизация
+- **Vite 7** — сборка и HMR
 
-- 🚀 Server-side rendering
-- ⚡️ Hot Module Replacement (HMR)
-- 📦 Asset bundling and optimization
-- 🔄 Data loading and mutations
-- 🔒 TypeScript by default
-- 🎉 TailwindCSS for styling
-- 📖 [React Router docs](https://reactrouter.com/)
+## Функциональность
 
-## Getting Started
+- Авторизация (логин/выход, защита маршрутов через `clientLoader`)
+- Таблица товаров с серверной сортировкой и пагинацией через URL-параметры
+- Поиск по товарам с debounce
+- Добавление товара через drawer (боковая панель на роутинге)
+- Скелетон при загрузке данных
 
-### Installation
+## API
 
-Install the dependencies:
+Используется публичный API [DummyJSON](https://dummyjson.com):
+
+- `GET /auth/login` — авторизация
+- `GET /products/search` — список товаров с поиском, сортировкой и пагинацией
+- `POST /products/add` — добавление товара
+
+## Структура проекта
+
+```
+app/
+  features/
+    products/
+      api.ts                          # API товаров и типы
+      hooks/
+        use-products.ts               # Хук: query + сортировка + поиск + пагинация
+      components/
+        ProductsTable/index.tsx       # Таблица товаров
+        ProductsTableSkeleton/index.tsx
+        ProductsToolbar/index.tsx     # Панель действий
+        AddProductDrawer/index.tsx    # Drawer добавления товара
+    auth/
+      api.ts                          # API авторизации и сессия
+      components/
+        LoginForm/index.tsx           # Форма входа
+        LoginForm/validation.ts
+  components/
+    ui/
+      Checkbox/index.tsx              # Переиспользуемые UI-компоненты
+      TextInput/index.tsx
+      SearchInput/index.tsx
+      Pagination/index.tsx
+      ProgressBar/index.tsx
+  lib/
+    cn.ts                             # Утилита cn (clsx + tailwind-merge)
+  routes/
+    products.tsx                      # Layout с auth guard
+    products.index.tsx                # Страница каталога
+    products.empty.tsx                # Index route (пустой)
+    products.add.tsx                  # Drawer добавления
+    login.tsx                         # Страница входа
+public/
+  icons/                              # SVG-иконки
+```
+
+## Запуск
+
+### Установка зависимостей
 
 ```bash
 npm install
 ```
 
-### Development
-
-Start the development server with HMR:
+### Режим разработки
 
 ```bash
 npm run dev
 ```
 
-Your application will be available at `http://localhost:5173`.
+Приложение будет доступно на `http://localhost:5173`.
 
-## Building for Production
+### Проверка типов
 
-Create a production build:
+```bash
+npm run typecheck
+```
+
+### Сборка для продакшена
 
 ```bash
 npm run build
 ```
 
-## Deployment
-
-### Docker Deployment
-
-To build and run using Docker:
+### Запуск продакшен-сборки
 
 ```bash
-docker build -t my-app .
-
-# Run the container
-docker run -p 3000:3000 my-app
+npm run build
+npm run start
 ```
 
-The containerized application can be deployed to any platform that supports Docker, including:
+## Учетные данные для входа
 
-- AWS ECS
-- Google Cloud Run
-- Azure Container Apps
-- Digital Ocean App Platform
-- Fly.io
-- Railway
+API DummyJSON предоставляет тестового пользователя:
 
-### DIY Deployment
-
-If you're familiar with deploying Node applications, the built-in app server is production-ready.
-
-Make sure to deploy the output of `npm run build`
-
-```
-├── package.json
-├── package-lock.json (or pnpm-lock.yaml, or bun.lockb)
-├── build/
-│   ├── client/    # Static assets
-│   └── server/    # Server-side code
-```
-
-## Styling
-
-This template comes with [Tailwind CSS](https://tailwindcss.com/) already configured for a simple default starting experience. You can use whatever CSS framework you prefer.
-
----
-
-Built with ❤️ using React Router.
+- **Логин:** `emilys`
+- **Пароль:** `emilyspass`
