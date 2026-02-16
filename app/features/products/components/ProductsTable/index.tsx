@@ -159,7 +159,7 @@ export function ProductsTable({
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id} className="border-b border-gray-100">
-              {headerGroup.headers.map((header) => {
+              {headerGroup.headers.map((header, headerCellIndex) => {
                 const canSort = header.column.getCanSort();
                 const sorted = header.column.getIsSorted();
                 return (
@@ -167,7 +167,8 @@ export function ProductsTable({
                     key={header.id}
                     className={cn(
                       "px-4 py-3 text-left text-sm font-medium text-gray-400",
-                      canSort && "cursor-pointer select-none hover:text-gray-600"
+                      canSort && "cursor-pointer select-none hover:text-gray-600",
+                       headerCellIndex === 0 && "border-l-4 border-l-transparent"
                     )}
                     style={{ width: header.getSize() }}
                     onClick={canSort ? header.column.getToggleSortingHandler() : undefined}
