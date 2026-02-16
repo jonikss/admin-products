@@ -1,3 +1,6 @@
+import ChevronLeftIcon from "@icons/chevron-left.svg?react";
+import ChevronRightIcon from "@icons/chevron-right.svg?react";
+
 function getPageNumbers(
   current: number,
   total: number
@@ -62,7 +65,7 @@ export function Pagination({
           disabled={page === 1}
           className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
         >
-          <img src="/icons/chevron-left.svg" alt="Назад" width={20} height={20} />
+          <ChevronLeftIcon width={20} height={20} />
         </button>
 
         {pageNumbers.map((p, i) =>
@@ -90,7 +93,7 @@ export function Pagination({
           disabled={page === totalPages}
           className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-gray-100 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
         >
-          <img src="/icons/chevron-right.svg" alt="Вперёд" width={20} height={20} />
+          <ChevronRightIcon width={20} height={20} />
         </button>
       </div>
     </div>

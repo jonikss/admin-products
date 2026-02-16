@@ -1,3 +1,5 @@
+import SearchIcon from "@icons/search.svg?react";
+
 interface SearchInputProps {
   value: string;
   onChange: (value: string) => void;
@@ -13,9 +15,7 @@ export function SearchInput({
 }: SearchInputProps) {
   return (
     <div className={`relative ${className}`}>
-      <img
-        src="/icons/search.svg"
-        alt=""
+      <SearchIcon
         width={20}
         height={20}
         className="absolute left-3 top-1/2 -translate-y-1/2"

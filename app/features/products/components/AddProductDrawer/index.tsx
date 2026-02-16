@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { z } from "zod";
 import { addProduct } from "../../api";
 import { TextInput } from "~/components/ui/TextInput";
+import CloseIcon from "@icons/close.svg?react";
 
 const addProductSchema = z.object({
   title: z.string().min(1, "Обязательное поле"),
@@ -61,7 +62,7 @@ export function AddProductDrawer() {
             onClick={close}
             className="w-8 h-8 rounded-lg flex items-center justify-center hover:bg-gray-100 transition-colors"
           >
-            <img src="/icons/close.svg" alt="Закрыть" width={16} height={16} />
+            <CloseIcon width={16} height={16} />
           </button>
         </div>
 

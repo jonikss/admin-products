@@ -10,12 +10,17 @@ import {
 import type { Product } from "../../api";
 import { formatPrice } from "./utils";
 import { Checkbox } from "~/components/ui/Checkbox";
+import PlusIcon from "@icons/plus.svg?react";
+import DotsIcon from "@icons/dots.svg?react";
+import SortAscIcon from "@icons/sort-asc.svg?react";
+import SortAscActiveIcon from "@icons/sort-asc-active.svg?react";
+import SortDescActiveIcon from "@icons/sort-desc-active.svg?react";
 
 interface ProductsTableProps {
   data: Product[];
   sorting: SortingState;
   onSortingChange: (sorting: SortingState) => void;
-} 
+}
 
 export function ProductsTable({
   data,
@@ -112,10 +117,10 @@ export function ProductsTable({
         cell: () => (
           <div className="flex items-center gap-1">
             <button className="w-8 h-8 rounded-full bg-[#242EDB] text-white flex items-center justify-center hover:bg-[#1a22b0] transition-colors">
-              <img src="/icons/plus.svg" alt="Добавить" width={16} height={16} />
+              <PlusIcon width={16} height={16} />
             </button>
             <button className="w-8 h-8 rounded-full border border-gray-200 flex items-center justify-center hover:bg-gray-50 transition-colors">
-              <img src="/icons/dots.svg" alt="Ещё" width={16} height={16} />
+              <DotsIcon width={16} height={16} />
             </button>
           </div>
         ),
@@ -173,19 +178,11 @@ export function ProductsTable({
                             header.getContext()
                           )}
                       {canSort && (
-                        <img
-                          src={
-                            sorted === "asc"
-                              ? "/icons/sort-asc-active.svg"
-                              : sorted === "desc"
-                                ? "/icons/sort-desc-active.svg"
-                                : "/icons/sort-asc.svg"
-                          }
-                          alt=""
-                          width={12}
-                          height={12}
-                          className="ml-1"
-                        />
+                        sorted === "asc"
+                          ? <SortAscActiveIcon width={12} height={12} className="ml-1" />
+                          : sorted === "desc"
+                            ? <SortDescActiveIcon width={12} height={12} className="ml-1" />
+                            : <SortAscIcon width={12} height={12} className="ml-1" />
                       )}
                     </div>
                   </th>
