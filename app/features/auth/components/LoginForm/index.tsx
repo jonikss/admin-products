@@ -68,7 +68,7 @@ export function LoginForm() {
             Добро пожаловать!
           </h1>
           <p className="text-center text-[#E0E0E0] text-sm mb-10">
-            Показывай каталоги, товары, бренды, тестируй и прочую информацию
+           Пожалуйста, авторизируйтесь
           </p>
 
           <form onSubmit={handleSubmit(onSubmit)}>
