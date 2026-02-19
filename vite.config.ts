@@ -8,7 +8,7 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig({
   resolve: {
     alias: {
-      "@icons": path.resolve(__dirname, "public/icons"),
+      "@icons": path.resolve(__dirname, "app/icons"),
     },
   },
   plugins: [tailwindcss(), svgr(), reactRouter(), tsconfigPaths()],

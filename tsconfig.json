@@ -16,7 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["./app/*"],
-      "@icons/*": ["./public/icons/*"]
+      "@icons/*": ["./app/icons/*"]
     },
     "esModuleInterop": true,
     "verbatimModuleSyntax": true,
