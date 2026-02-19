@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import { useSearchParams } from "react-router";
 import type { SortingState } from "@tanstack/react-table";
-import { fetchProducts } from "../api";
+import { fetchProducts, type ProductsResponse } from "../api";
 
 const STORAGE_KEY = "products-sorting";
 const PAGE_SIZE = 10;
@@ -21,7 +21,7 @@ function saveSorting(sorting: SortingState) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(sorting));
 }
 
-export function useProducts() {
+export function useProducts(initialData?: ProductsResponse) {
   const [searchParams, setSearchParams] = useSearchParams();
   const [sorting, setSorting] = useState<SortingState>(loadSorting());
   const [search, setSearch] = useState("");
@@ -96,6 +96,7 @@ export function useProducts() {
         search: debouncedSearch || undefined,
       }),
     placeholderData: keepPreviousData,
+    initialData: !sorting.length && !debouncedSearch && skip === 0 ? initialData : undefined,
   });
 
   const products = data?.products ?? [];

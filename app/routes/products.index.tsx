@@ -1,13 +1,23 @@
 import { useCallback } from "react";
-import { Outlet } from "react-router";
+import { Outlet, useLoaderData } from "react-router";
 import type { Route } from "./+types/products.index";
 import { useProducts } from "~/features/products/hooks/use-products";
+import { fetchProducts, type ProductsResponse } from "~/features/products/api";
 import { ProductsTable } from "~/features/products/components/ProductsTable";
 import { ProductsTableSkeleton } from "~/features/products/components/ProductsTableSkeleton";
 import { ProductsToolbar } from "~/features/products/components/ProductsToolbar";
 import { CommandBar, useCommandExecutor } from "~/features/command-bar";
 import { Pagination } from "~/components/ui/Pagination";
 import { ProgressBar } from "~/components/ui/ProgressBar";
+
+export async function loader({ request }: Route.LoaderArgs) {
+  const url = new URL(request.url);
+  const page = Math.max(1, Number(url.searchParams.get("page")) || 1);
+  const skip = (page - 1) * 10;
+
+  const data = await fetchProducts({ limit: 10, skip });
+  return { initialData: data };
+}
 
 export function meta({}: Route.MetaArgs) {
   return [
@@ -16,7 +26,7 @@ export function meta({}: Route.MetaArgs) {
   ];
 }
 
-export default function ProductsIndex() {
+export default function ProductsIndex({ loaderData }: Route.ComponentProps) {
   const {
     products,
     total,
@@ -34,7 +44,7 @@ export default function ProductsIndex() {
     showFrom,
     showTo,
     pageSize,
-  } = useProducts();
+  } = useProducts(loaderData.initialData);
 
   const { executeCommand } = useCommandExecutor({
     onSearch: setSearch,
